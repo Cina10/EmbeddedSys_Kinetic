@@ -4,10 +4,12 @@ Servo myservo;  // create servo object to control a servo
 
 int posVal = 0;    // variable to store the servo position
 int servoPin = 15; // Servo motor pin
+int servoPin2 = 19;
 
 void setup() {
   myservo.setPeriodHertz(50);           // standard 50 hz servo
   myservo.attach(servoPin, 500, 2500);  // attaches the servo on servoPin to the servo object
+  myservo.attach(servoPin2, 500, 1500);
 }
 void loop() {
 
