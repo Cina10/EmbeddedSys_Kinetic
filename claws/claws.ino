@@ -1,4 +1,9 @@
-// DC Motor
+/**********************************************************************
+  Filename    : Control_Motor_by_L293D
+  Description : Use PWM to control the direction and speed of the motor.
+  Auther      : www.freenove.com
+  Modification: 2020/07/11
+**********************************************************************/
 int in1Pin = 12;      // Define L293D channel 1 pin
 int in2Pin = 14;      // Define L293D channel 2 pin
 int enable1Pin = 13;  // Define L293D enable 1 pin
@@ -18,18 +23,7 @@ void setup() {
 }
 
 void loop() {
-  int potenVal = analogRead(A0);      // Convert the voltage of rotary potentiometer into digital
-  //Compare the number with value 2048, 
-  //if more than 2048, clockwise rotates, otherwise, counter clockwise rotates
-  rotationSpeed = potenVal - 2048;
-  if (potenVal > 2048)
-    rotationDir = true;
-  else
-    rotationDir = false;
-  // Calculate the motor speed
-  rotationSpeed = abs(potenVal - 2048);
-  //Control the steering and speed of the motor
-  driveMotor(rotationDir, constrain(rotationSpeed,0,2048));
+ driveMotor(true, 1000);
 }
 
 void driveMotor(boolean dir, int spd) {
