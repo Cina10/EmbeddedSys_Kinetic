@@ -1,41 +1,43 @@
-/**********************************************************************
-  Filename    : Control_Motor_by_L293D
-  Description : Use PWM to control the direction and speed of the motor.
-  Auther      : www.freenove.com
-  Modification: 2020/07/11
-**********************************************************************/
-int in1Pin = 12;      // Define L293D channel 1 pin
-int in2Pin = 14;      // Define L293D channel 2 pin
-int enable1Pin = 13;  // Define L293D enable 1 pin
-int channel = 0;
+//Includes the Arduino Stepper Library
+#include <Stepper.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
+// Defines the number of steps per rotation
+const int stepsPerRevolution = 2038;
 
-boolean rotationDir;  // Define a variable to save the motor's rotation direction
-int rotationSpeed;    // Define a variable to save the motor rotation speed
+const char *ssid_Router     = "";
+const char *password_Router = "";
+String address= "http://165.227.76.232:3000/mlw2173/running";
+
+// Creates an instance of stepper class
+// Pins entered in sequence IN1-IN3-IN2-IN4 for proper step sequence
+Stepper myStepper = Stepper(stepsPerRevolution, 14, 26, 27, 25);
 
 void setup() {
-  // Initialize the pin into an output mode:
-  pinMode(in1Pin, OUTPUT);
-  pinMode(in2Pin, OUTPUT);
-  pinMode(enable1Pin, OUTPUT);
-  
-  ledcSetup(channel,1000,11);         //Set PWM to 11 bits, range is 0-2047
-  ledcAttachPin(enable1Pin,channel);
+  // Nothing to do (Stepper Library sets pins as outputs)
+  Serial.begin(9600);
+  WiFi.begin(ssid_Router, password_Router);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("Connected to wifi");
 }
 
 void loop() {
- driveMotor(true, 1000);
-}
-
-void driveMotor(boolean dir, int spd) {
-  // Control motor rotation direction
-  if (rotationDir) {
-    digitalWrite(in1Pin, HIGH);
-    digitalWrite(in2Pin, LOW);
+  HTTPClient http;
+  Serial.print("[HTTP] begin...\n");
+  http.begin(address); //HTTP
+  Serial.print("[HTTP] GET...\n"); // start connection and send HTTP header
+  int httpCode = http.GET();
+  if(httpCode > 0 && http.getString().equals("true")) {
+    // Rotate CW slowly
+    myStepper.setSpeed(10);
+    myStepper.step(stepsPerRevolution);
+    delay(1000);
   }
   else {
-    digitalWrite(in1Pin, LOW);
-    digitalWrite(in2Pin, HIGH);
+    Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
   }
-  // Control motor rotation speed
-  ledcWrite(channel, spd);
+
 }
