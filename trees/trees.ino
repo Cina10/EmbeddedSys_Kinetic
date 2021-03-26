@@ -15,7 +15,7 @@ void setup() {
   myservo.setPeriodHertz(50);           // standard 50 hz servo
   myservo.attach(servoPin, 500, 2500);  // attaches the servo on servoPin to the servo object
   myservo.attach(servoPin2, 500, 1500);
-  Serial.begin(115200);
+  Serial.begin(9600);
   WiFi.begin(ssid_Router, password_Router);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -46,6 +46,6 @@ void loop() {
     }
   }
   else {
-    USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
   }
 }
