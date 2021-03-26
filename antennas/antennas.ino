@@ -1,6 +1,9 @@
 #include <ESP32Servo.h>
-
+#include <WiFi.h>
 Servo myservo;  // create servo object to control a servo
+
+const char *ssid_Router     = "";
+const char *password_Router = "";
 
 int posVal = 0;    // variable to store the servo position
 int servoPin = 15; // Servo motor pin
@@ -10,6 +13,13 @@ void setup() {
   myservo.setPeriodHertz(50);           // standard 50 hz servo
   myservo.attach(servoPin, 500, 2500);  // attaches the servo on servoPin to the servo object
   myservo.attach(servoPin2, 500, 1500);
+  Serial.begin(115200);
+  WiFi.begin(ssid_Router, password_Router);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("Connected to wifi");
 }
 void loop() {
 
