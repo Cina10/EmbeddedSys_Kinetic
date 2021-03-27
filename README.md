@@ -1,7 +1,10 @@
 # Creative Embedded Systems - Module 4: Kinetic Art
 This piece is a kinetic sculpture that illustrates the destructive effects of industrialization on the natural environment. This piece consists of a natural landscape where we can see two robotic legs causing destruction to the landscape, along with two spinning trees. A video demo of the piece can be found [here](https://www.youtube.com/watch?v=PhmWeasTCKc&ab_channel=MichaelLeoWinitch).
 
-
+<br>
+ <img src="https://github.com/Cina10/EmbeddedSys_Kinetic/blob/master/Images/Sculpture.jpeg" width="500">
+ <br>
+ 
 ## The Enclosure and Robotic Legs
 The enclosure was created from cardboard, and a plastic bag. The main part of the enclosure also uses popsicle sticks to provide structural support. The trees were created using skewers and cardstock. We used vine charcoal to add some texture to the front of a piece, and emphasize the destruction caused by the claws. 
 
@@ -51,7 +54,3 @@ String address= "http://165.227.76.232:3000/YOUR-UNI/running";
 ~~~
 
 If you also want to just run the sculture without having the API setup, you can do that as well. In the `loop()` functions for both files just remove the lines where the HTTP request is made to the server, and your code should be good to run.
-
-<br>
- <img src="https://github.com/Cina10/EmbeddedSys_Kinetic/blob/master/Images/Sculpture.jpeg" width="500">
- <br>
