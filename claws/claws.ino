@@ -7,7 +7,7 @@ const int stepsPerRevolution = 2038;
 
 const char *ssid_Router     = "";
 const char *password_Router = "";
-String address= "http://165.227.76.232:3000/mlw2173/running";
+String address= "http://165.227.76.232:3000/YOUR-UNI/running";
 
 // Creates an instance of stepper class
 // Pins entered in sequence IN1-IN3-IN2-IN4 for proper step sequence
