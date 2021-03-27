@@ -9,7 +9,7 @@ const char *password_Router = "";
 int posVal = 0;    // variable to store the servo position
 int servoPin = 15; // Servo motor pin
 int servoPin2 = 19;
-String address= "http://165.227.76.232:3000/mlw2173/running";
+String address= "http://165.227.76.232:3000/YOUR-UNI/running";
 
 void setup() {
   myservo.setPeriodHertz(50);           // standard 50 hz servo
